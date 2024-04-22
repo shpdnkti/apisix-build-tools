@@ -28,6 +28,7 @@ apisix_nginx_module_ver="1.16.0"
 wasm_nginx_module_ver="0.7.0"
 lua_var_nginx_module_ver="v0.5.3"
 lua_resty_events_ver="0.2.0"
+nginx_upload_module_ver="2.2"
 
 
 install_openssl_3(){
@@ -127,11 +128,16 @@ else
         lua-var-nginx-module-${lua_var_nginx_module_ver}
 fi
 
+git clone --depth=1 -b ${nginx_upload_module_ver} \
+    https://github.com/Austinb/nginx-upload-module.git \
+    nginx_upload_module-${nginx_upload_module_ver}
+
 cd ngx_multi_upstream_module-${ngx_multi_upstream_module_ver} || exit 1
 ./patch.sh ../openresty-${OPENRESTY_VERSION}
 cd ..
 
 cd apisix-nginx-module-${apisix_nginx_module_ver}/patch || exit 1
+find ./ -name 'nginx-error_page_contains_apisix.patch' -delete
 ./patch.sh ../../openresty-${OPENRESTY_VERSION}
 cd ../..
 
@@ -170,6 +176,7 @@ fi
     --add-module=../wasm-nginx-module-${wasm_nginx_module_ver} \
     --add-module=../lua-var-nginx-module-${lua_var_nginx_module_ver} \
     --add-module=../lua-resty-events-${lua_resty_events_ver} \
+    --add-module=../nginx_upload_module-${nginx_upload_module_ver} \
     --with-poll_module \
     --with-pcre-jit \
     --without-http_rds_json_module \

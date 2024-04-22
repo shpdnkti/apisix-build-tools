@@ -20,7 +20,7 @@ COPY --from=APISIX-RUNTIME /usr/local/openresty /tmp/build/output/openresty
 COPY --from=APISIX-RUNTIME /tmp/dist /tmp/dist
 COPY --from=APISIX-RUNTIME /tmp/codename /tmp/codename
 COPY package-apisix-runtime.sh /package-apisix-runtime.sh
-COPY post-install-apisix-runtime.sh /post-install-apisix-runtime.sh
+COPY post-install-apisix-runtime.sh /post-install-runtime.sh
 COPY usr /usr
 
 RUN /package-apisix-runtime.sh

@@ -7,7 +7,7 @@ codename=$(cat /tmp/codename)
 
 # Determine the name of artifact
 # The defaut is apisix-runtime
-artifact="apisix-runtime"
+artifact="openresty"
 if [ "$ARTIFACT" != "0" ]; then
     artifact=${ARTIFACT}
 fi
@@ -19,13 +19,14 @@ fpm -f -s dir -t "$PACKAGE_TYPE" \
     -n "$artifact" \
     -a "$(uname -i)" \
     -v "$RUNTIME_VERSION" \
+    -v "1.25.3.1" \
     --iteration "$ITERATION" \
-    --post-install post-install-apisix-runtime.sh \
-    --description "APISIX's OpenResty distribution." \
-    --license "ASL 2.0" \
+    --post-install post-install-runtime.sh \
+    --description "Scalable Web Platform by Extending NGINX with Lua" \
+    --license "BSD" \
     -C /tmp/build/output \
     -p /output \
-    --url 'http://apisix.apache.org/' \
+    --url 'https://openresty.org' \
     --conflicts openresty \
     --config-files usr/lib/systemd/system/openresty.service \
     --prefix=/usr/local

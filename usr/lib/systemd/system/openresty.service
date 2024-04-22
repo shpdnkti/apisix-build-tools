@@ -1,5 +1,5 @@
 [Unit]
-Description=APISIX's OpenResty distribution
+Description==The OpenResty Application Platform
 After=syslog.target network-online.target remote-fs.target nss-lookup.target
 Wants=network-online.target
 

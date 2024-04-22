@@ -36,12 +36,12 @@ fpm -f -s dir -t "$PACKAGE_TYPE" \
     -d "openresty-zlib >= $openresty_zlib_version" \
     -d "openresty-openssl111 >= $openresty_openssl111_version" \
     -d "openresty-pcre >= $openresty_pcre_version" \
-    --post-install post-install-apisix-base.sh \
-    --description "APISIX's OpenResty distribution." \
+    --post-install post-install.sh \
+    --description "The OpenResty Application Platform" \
     --license "ASL 2.0" \
     -C /tmp/build/output \
     -p /output \
-    --url 'http://apisix.apache.org/' \
+    --url 'https://openresty.org/' \
     --conflicts openresty \
     --config-files usr/lib/systemd/system/openresty.service \
     --prefix=/usr/local
